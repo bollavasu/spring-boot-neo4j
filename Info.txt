@@ -1,0 +1,39 @@
+
+https://github.com/TechPrimers/spring-boot-neo4j-example-1
+
+1)Download Neo4j Community Edition from https://neo4j.com/download-center/#releases
+
+2)Extract it 
+
+3)Neo4J start : go to C:\neo4j-community-3.5.3\bin
+                neo4j console                      (Ctrl C to stop the server)        
+			    go to http://localhost:7474/       (neo4j/neo4j2)
+
+4)execute the following queries in neo4j browser
+
+CREATE (Inception:Movie {title: 'Inception', director: 'Christopher Nolan'})
+CREATE (DarkKnight:Movie {title: 'The Dark Knight', director: 'Christopher Nolan'})
+CREATE (Peter:User {name: 'Peter N', age: 30})
+CREATE (Sam:User {name: 'Sam Sheldon', age: 20})
+CREATE (Ryan:User {name: 'Ryan A', age: 35})
+
+CREATE
+(Inception)-[:RATED {rating: 9}]->(Peter),
+(Inception)-[:RATED {rating: 8}]->(Sam),
+(DarkKnight)-[:RATED {rating: 9}]->(Sam),
+(DarkKnight)-[:RATED {rating: 8}]->(Peter)
+;
+
+MATCH (DarkKnight:Movie {title: 'The Dark Knight'}), (Ryan:User)
+CREATE
+(DarkKnight)-[:RATED {rating: 8}]->(Ryan)
+;			  
+
+5)mvn clean install
+
+6)mvn spring-boot:run
+
+7)get all user details
+  
+  http://localhost:8080/rest/neo4j/user
+  
